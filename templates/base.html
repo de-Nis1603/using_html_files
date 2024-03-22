@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Тренажеры</title>
+</head>
+<body>
+    <h1>Привет, Миссия Колонизация Марса!</h1>
+    <h4>И на Марсе будут яблони цвести!</h4>
+     {% if "врач" in job or 'ученый' in job %}
+            <div>Научные симуляторы</div>
+            <img src='../static/img/millenium_hawk_sim.jpeg'>
+     {% elif 'инженер' in job or 'строитель' in job %}
+            <div>Инженерные тренажеры</div>
+            <img src='../static/img/millenium_hawk_eng.jpeg'>
+     {% else %}
+            <div>Курсы профориентации</div>
+            <img src='../static/img/millenium_hawk_po.jpeg'>
+     {% endif %}
+</body>
+</html>
