@@ -50,8 +50,12 @@ def answer():
         'ready': True,
     }
     info = list(map(lambda x: x, data.values()))
-    return render_template('form_answer.html', link=url_for('static', filename='css/mars_style.css'), values=info,
-                           size=len(data.keys()))
+    return render_template('form_answer.html', values=info, size=len(data.keys()))
+
+@app.route('/distribution')
+def distribution():
+    data = ['Князь', "Илья Муромец", "Добрыня Никитич", "Алеша Попович", "Конь Юлий"]
+    return render_template('distribution.html', size=len(data), people=data)
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
