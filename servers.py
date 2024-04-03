@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
@@ -36,6 +36,22 @@ def login_form_creator():
 @app.route('/success')
 def successful_login():
     return 'success'
+
+@app.route('/auto_answer')
+@app.route('/answer')
+def answer():
+    data = {
+        'surname': "Романов",
+        'name': "Петр",
+        'education': "Алексеевич",
+        'profession': "Царь",
+        'sex': "male",
+        'motivation': "Прорубим окно на Марс!",
+        'ready': True,
+    }
+    info = list(map(lambda x: x, data.values()))
+    return render_template('form_answer.html', link=url_for('static', filename='css/mars_style.css'), values=info,
+                           size=len(data.keys()))
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')

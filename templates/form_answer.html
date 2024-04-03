@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+{% set outs = ['Фамилия: ','Имя: ','Образование: ','Профессия: ','Пол: ','Мотивация: ','Готовы остаться на Марсе? ']%}
+{% for num in range(size) %}
+<p>{{outs[num]}}{{values[num]}}</p>
+{% endfor %}
+{% endblock %}
