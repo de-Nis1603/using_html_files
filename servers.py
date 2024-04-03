@@ -57,5 +57,21 @@ def distribution():
     data = ['Князь', "Илья Муромец", "Добрыня Никитич", "Алеша Попович", "Конь Юлий"]
     return render_template('distribution.html', size=len(data), people=data)
 
+@app.route('/table/<string:gen>/<int:age>')
+def table(gen, age):
+    if gen == 'female':
+        if age >= 21:
+            r, g, b = 245, 55, 85
+        else:
+            r, g, b = 245, 172, 214
+    if gen == 'male':
+        if age >= 21:
+            r, g, b = 42, 106, 245
+        else:
+            r, g, b = 91, 245, 69
+    if age >= 21:
+        return render_template('table.html', r=r, g=g, b=b, ref=url_for('static', filename='img/not_young_person_from_mars.png'))
+    return render_template('table.html', r=r, g=g, b=b, ref=url_for('static', filename='img/young_person_from_mars.png'))
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
