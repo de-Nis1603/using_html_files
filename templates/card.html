@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Личная карточка</h2>
+<h4>{{ name + '' + surname }}</h4>
+<img src="{{ ref }}"><img/>
+{% for num in range(size)%}
+<p>{{list_of_jobs[num]}}</p>
+{% endfor %}
+{% endblock %}

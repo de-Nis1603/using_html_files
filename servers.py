@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
+import json
+from random import randint
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -72,6 +74,37 @@ def table(gen, age):
     if age >= 21:
         return render_template('table.html', r=r, g=g, b=b, ref=url_for('static', filename='img/not_young_person_from_mars.png'))
     return render_template('table.html', r=r, g=g, b=b, ref=url_for('static', filename='img/young_person_from_mars.png'))
+
+@app.route('/member')
+def member():
+    data = [{'name': "Князь",
+                'surname': "",
+                'photo': 'img/Knyaz.png',
+                'jobs': ['правитель']},
+               {'name': "Илья ",
+                'surname': "Муромец",
+                'photo': 'img/Bgtr_I.png',
+                'jobs': ["богатырь", "дровосек", "повар"]},
+               {"name": "Добрыня ",
+                "surname": "Никитич",
+                "photo" : "img/Bgtr_D.png",
+                "jobs": ["богатырь", "охотник", "пилот Змея-Горыныча"]},
+               {"name": "Алеша ",
+                "surname": "Попович",
+                "photo" : "img/Bgtr_A.png",
+                "jobs": ["богатырь", "рыболов", "огородник"]},
+               {"name": "конь Юлий ",
+                "surname": "Цезарь",
+                "photo" : "img/Yuliy.png",
+               "jobs": ["богатырская лошадь", "библиотекарь", "переговорщик", "казначей", "специалист по радиационной защите"]}]
+    num = randint(0, len(data) - 1)
+    print(num)
+    name = data[num]['name']
+    print(name)
+    surname = data[num]['surname']
+    photo = data[num]['photo']
+    list_of_jobs = data[num]['jobs']
+    return render_template('card.html', name=name, surname=surname, list_of_jobs=sorted(list_of_jobs), size=len(list_of_jobs) ,ref=url_for('static', filename=photo))
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
